@@ -1,0 +1,1 @@
+Ejemplo de programa en C# que dibuja un triángulo.
