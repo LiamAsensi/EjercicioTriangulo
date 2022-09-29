@@ -7,38 +7,41 @@ using System;
 class EjercicioTriangulo
 {
 	public static void Main()
-	{	
-        try
+	{
+        bool flag = false;
+        int altura = 0;
+        
+        /* Código para pedir los datos del programa y asegurarse de que introduce una cantidad correcta del tamaño
+         * para el triángulo, y que también sea un número y no un string*/
+        do
         {
-            Console.Write("Introduce la altura del triángulo: ");
-            int altura = Convert.ToInt32(Console.ReadLine());
-            
-            if (altura <= 0) throw new Exception("Se ha introducido un número menor o igual que 0.");
+            try
+            {
+                Console.Write("Introduce la altura del triángulo: ");
+                altura = Convert.ToInt32(Console.ReadLine());
+                
+                if (altura <= 0) throw new Exception("Se ha introducido un número menor o igual que 0.\n");
+                else if (altura > 50) throw new Exception("Se ha introducido un número demasiado grande.\n");
+                
+                flag = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}\n", e.Message);
+            }
+        } while (!flag);
+        
+        Console.WriteLine();
+        
+        /* Código para crear el triángulo. Se trata de un bucle principal que va recorriendo las filas del triángulo
+         * mientras también aumenta el número de asteriscos que se dibujan de dos en dos. Dentro hay dos bucles, uno
+         * para dibujar los espacios y otro para los asteriscos*/
+        for (int filaActual = 1, cantAsterisco = 1; filaActual <= altura; filaActual++, cantAsterisco += 2)
+        {
+            for (int colEspacio = 1; colEspacio <= altura - filaActual ; colEspacio++) Console.Write(" ");
+            for (int colAsterisco = 1; colAsterisco <= cantAsterisco; colAsterisco++) Console.Write("*");
             
             Console.WriteLine();
-        
-            for (int i = 1, ast = 1; i <= altura; i++, ast += 2)
-            {
-                for (int sp = 1; sp <= altura - i ; sp++)
-                {
-                    Console.Write(" ");
-                }
-                for (int j = 1; j <= ast; j++)
-                {
-                    Console.Write("*");
-                }
-                for (int sp = 1; sp <= altura - i ; sp++)
-                {
-                    Console.Write(" ");
-                }
-                Console.WriteLine();
-            }
         }
-        catch (Exception e)
-        {
-            Console.WriteLine("Error: {0}", e.Message);
-        }
-        
-        
 	}
 }
